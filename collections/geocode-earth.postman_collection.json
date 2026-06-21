@@ -1,0 +1,283 @@
+{
+  "info": {
+    "_postman_id": "a7f3c9d2-1e44-4b8a-9c61-3f2d6b0e9a51",
+    "name": "Geocode Earth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Hosted geocoding and address autocomplete API built on the open-source Pelias geocoder. Forward (search), autocomplete, reverse, and structured geocoding plus place lookup. Authentication is via the api_key query string parameter.\n\nContact Support:\n Name: Geocode Earth Support\n Email: hello@geocode.earth",
+      "type": "text/plain"
+    }
+  },
+  "item": [
+    {
+      "name": "Forward",
+      "description": {
+        "content": "Forward geocoding endpoints that turn text or address components into coordinates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Forward geocoding (search)",
+          "request": {
+            "name": "Forward geocoding (search)",
+            "url": {
+              "raw": "{{baseUrl}}/search?api_key={{apiKey}}&text=476 5th Avenue, New York, NY 10018",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "api_key",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "text",
+                  "value": "476 5th Avenue, New York, NY 10018"
+                },
+                {
+                  "key": "size",
+                  "value": "10",
+                  "disabled": true
+                },
+                {
+                  "key": "layers",
+                  "value": "venue,address",
+                  "disabled": true
+                },
+                {
+                  "key": "boundary.country",
+                  "value": "US",
+                  "disabled": true
+                },
+                {
+                  "key": "focus.point.lat",
+                  "value": "40.75",
+                  "disabled": true
+                },
+                {
+                  "key": "focus.point.lon",
+                  "value": "-73.98",
+                  "disabled": true
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "Autocomplete (type-ahead) geocoding",
+          "request": {
+            "name": "Autocomplete (type-ahead) geocoding",
+            "url": {
+              "raw": "{{baseUrl}}/autocomplete?api_key={{apiKey}}&text=lond&focus.point.lat=38.82&focus.point.lon=-77.01",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "autocomplete"
+              ],
+              "query": [
+                {
+                  "key": "api_key",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "text",
+                  "value": "lond"
+                },
+                {
+                  "key": "focus.point.lat",
+                  "value": "38.82"
+                },
+                {
+                  "key": "focus.point.lon",
+                  "value": "-77.01"
+                },
+                {
+                  "key": "layers",
+                  "value": "venue",
+                  "disabled": true
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "Structured forward geocoding",
+          "request": {
+            "name": "Structured forward geocoding",
+            "url": {
+              "raw": "{{baseUrl}}/search/structured?api_key={{apiKey}}&address=10 Downing St&locality=London&postalcode=SW1A 2AA&country=GB",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search",
+                "structured"
+              ],
+              "query": [
+                {
+                  "key": "api_key",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "address",
+                  "value": "10 Downing St"
+                },
+                {
+                  "key": "locality",
+                  "value": "London"
+                },
+                {
+                  "key": "postalcode",
+                  "value": "SW1A 2AA"
+                },
+                {
+                  "key": "country",
+                  "value": "GB"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ]
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reverse",
+      "description": {
+        "content": "Reverse geocoding from a coordinate point.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Reverse geocoding",
+          "request": {
+            "name": "Reverse geocoding",
+            "url": {
+              "raw": "{{baseUrl}}/reverse?api_key={{apiKey}}&point.lat=-22.95166&point.lon=-43.21083",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reverse"
+              ],
+              "query": [
+                {
+                  "key": "api_key",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "point.lat",
+                  "value": "-22.95166"
+                },
+                {
+                  "key": "point.lon",
+                  "value": "-43.21083"
+                },
+                {
+                  "key": "layers",
+                  "value": "coarse",
+                  "disabled": true
+                },
+                {
+                  "key": "boundary.circle.radius",
+                  "value": "1",
+                  "disabled": true
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ]
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Place",
+      "description": {
+        "content": "Direct record lookup by global identifier (gid).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Place lookup by gid",
+          "request": {
+            "name": "Place lookup by gid",
+            "url": {
+              "raw": "{{baseUrl}}/place?api_key={{apiKey}}&ids=whosonfirst:locality:101750367",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "place"
+              ],
+              "query": [
+                {
+                  "key": "api_key",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "ids",
+                  "value": "whosonfirst:locality:101750367"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ]
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.geocode.earth/v1",
+      "type": "string"
+    },
+    {
+      "key": "apiKey",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

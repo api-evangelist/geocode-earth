@@ -1,0 +1,61 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Geocode Earth
+providerId: geocode-earth
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Geocoding
+- Address Autocomplete
+- Reverse Geocoding
+- Mapping
+- Pelias
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Geocode Earth enforces two complementary limits per account: a monthly
+  request allowance tied to the subscription plan, and a per-second request
+  rate cap. Paid plans include up to 10 requests per second (Lite, Basic)
+  or 20 requests per second (Advanced), with higher caps negotiated on the
+  Custom enterprise plan. Specific reconciled per-account values should be
+  confirmed against the current pricing page and account dashboard.
+notes: >-
+  Per-second and monthly limits scale with the plan; verify exact values
+  on the pricing page and in the account dashboard during reconciliation.
+sources:
+- https://geocode.earth/pricing/
+- https://geocode.earth/docs/
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests Per Second (Lite / Basic)
+  scope: account
+  metric: requests
+  limit: up to 10 per second
+  notes: Per-second cap on the Lite and Basic monthly plans.
+- name: Requests Per Second (Advanced)
+  scope: account
+  metric: requests
+  limit: up to 20 per second
+  notes: Per-second cap on the Advanced monthly plan.
+- name: Monthly Request Allowance
+  scope: account
+  metric: requests
+  limit: see plan (150K / 400K / 2M / custom)
+  notes: Included monthly request volume varies by subscription tier.
+- name: Custom / Enterprise Limits
+  scope: account
+  metric: requests
+  limit: negotiated
+  notes: Per-second and monthly limits raised under a Custom enterprise agreement.
+policies:
+- name: Tiered Limits
+  description: Both per-second rate and monthly allowance increase as accounts move from Lite to Basic to Advanced to Custom.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on HTTP 429 responses and stay within the plan's requests-per-second cap.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

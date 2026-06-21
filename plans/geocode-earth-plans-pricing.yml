@@ -1,0 +1,150 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Geocode Earth
+providerId: geocode-earth
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: true
+tags:
+- Geocoding
+- Address Autocomplete
+- Reverse Geocoding
+- Mapping
+- Pelias
+- Plans
+description: >-
+  Geocode Earth uses simple monthly subscription tiers priced by included
+  request volume rather than per-request pay-as-you-go billing. Every plan
+  includes the full API surface (search, autocomplete, reverse, structured,
+  and place) and the right to store geocoded results without royalties. A
+  two-week free trial is available with no credit card required. Higher tiers
+  raise both the monthly request allowance and the requests-per-second rate
+  limit; very high volumes are handled through a custom enterprise plan.
+notes: >-
+  Plan names, prices, and included volumes reflect the Geocode Earth pricing
+  page; verify current values on the pricing page during reconciliation as
+  tiers and allowances change over time.
+sources:
+- https://geocode.earth/pricing/
+- https://geocode.earth/
+plans:
+- id: geocode-earth-trial
+  name: Free Trial
+  type: trial
+  description: >-
+    Two-week free trial of the full geocoding API with no credit card
+    required.
+  entries:
+  - label: Trial Access
+    name: trial
+    type: trial
+    metric: requests
+    limit: -1
+    timeFrame: day
+    geo: global
+    unit: 1
+    price: free for 14 days
+    userMultiplied: false
+  elements:
+  - name: Search
+  - name: Autocomplete
+  - name: Reverse
+  - name: Structured Search
+  - name: Place
+- id: geocode-earth-lite
+  name: Lite
+  type: subscription
+  description: >-
+    Entry monthly plan including 150,000 requests per month at up to 10
+    requests per second.
+  entries:
+  - label: Included Requests
+    name: included_requests
+    type: subscription
+    metric: requests
+    limit: 150000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $100/month
+    userMultiplied: false
+  elements:
+  - name: Search
+  - name: Autocomplete
+  - name: Reverse
+  - name: Structured Search
+  - name: Place
+  - name: Store Results
+- id: geocode-earth-basic
+  name: Basic
+  type: subscription
+  description: >-
+    Monthly plan including 400,000 requests per month at up to 10 requests
+    per second.
+  entries:
+  - label: Included Requests
+    name: included_requests
+    type: subscription
+    metric: requests
+    limit: 400000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $200/month
+    userMultiplied: false
+  elements:
+  - name: Search
+  - name: Autocomplete
+  - name: Reverse
+  - name: Structured Search
+  - name: Place
+  - name: Store Results
+- id: geocode-earth-advanced
+  name: Advanced
+  type: subscription
+  description: >-
+    Monthly plan including 2 million requests per month at up to 20 requests
+    per second.
+  entries:
+  - label: Included Requests
+    name: included_requests
+    type: subscription
+    metric: requests
+    limit: 2000000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $500/month
+    userMultiplied: false
+  elements:
+  - name: Search
+  - name: Autocomplete
+  - name: Reverse
+  - name: Structured Search
+  - name: Place
+  - name: Store Results
+- id: geocode-earth-custom
+  name: Custom
+  type: enterprise
+  description: >-
+    Custom enterprise plan for 50 million or more requests per month, with
+    optional priority support and negotiated terms. Contact Geocode Earth.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: High Volume Requests
+  - name: Priority Support
+  - name: Custom Terms
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

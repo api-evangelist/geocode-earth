@@ -1,0 +1,537 @@
+openapi: 3.0.1
+info:
+  title: Geocode Earth API
+  description: >-
+    Hosted geocoding and address autocomplete API built on the open-source
+    Pelias geocoder. Provides forward (search), autocomplete, reverse, and
+    structured geocoding plus place lookup over open data sources
+    (OpenStreetMap, OpenAddresses, Who's on First, and Geonames). All
+    responses are GeoJSON FeatureCollections. Authentication is via an
+    api_key query string parameter.
+  termsOfService: https://geocode.earth/terms/
+  contact:
+    name: Geocode Earth Support
+    url: https://geocode.earth/
+    email: hello@geocode.earth
+  version: '1.0'
+servers:
+  - url: https://api.geocode.earth/v1
+    description: Geocode Earth v1 production API
+security:
+  - ApiKeyAuth: []
+paths:
+  /search:
+    get:
+      operationId: search
+      tags:
+        - Forward
+      summary: Forward geocoding (search)
+      description: >-
+        Turn a free-text place or address string into structured GeoJSON
+        results with coordinates, ranked by relevance.
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - name: text
+          in: query
+          required: true
+          description: The place or address to search for.
+          schema:
+            type: string
+          example: 476 5th Avenue, New York, NY 10018
+        - $ref: '#/components/parameters/Size'
+        - $ref: '#/components/parameters/Layers'
+        - $ref: '#/components/parameters/Sources'
+        - $ref: '#/components/parameters/BoundaryCountry'
+        - $ref: '#/components/parameters/BoundaryRectMinLon'
+        - $ref: '#/components/parameters/BoundaryRectMinLat'
+        - $ref: '#/components/parameters/BoundaryRectMaxLon'
+        - $ref: '#/components/parameters/BoundaryRectMaxLat'
+        - $ref: '#/components/parameters/BoundaryCircleLat'
+        - $ref: '#/components/parameters/BoundaryCircleLon'
+        - $ref: '#/components/parameters/BoundaryCircleRadius'
+        - $ref: '#/components/parameters/FocusPointLat'
+        - $ref: '#/components/parameters/FocusPointLon'
+        - $ref: '#/components/parameters/Lang'
+      responses:
+        '200':
+          description: A GeoJSON FeatureCollection of geocoding results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeocodingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /autocomplete:
+    get:
+      operationId: autocomplete
+      tags:
+        - Forward
+      summary: Autocomplete (type-ahead) geocoding
+      description: >-
+        Type-ahead geocoding optimized for partial, real-time user input.
+        Returns ranked suggestions as the user types.
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - name: text
+          in: query
+          required: true
+          description: The partial search input from the user.
+          schema:
+            type: string
+          example: lond
+        - $ref: '#/components/parameters/Layers'
+        - $ref: '#/components/parameters/Sources'
+        - $ref: '#/components/parameters/BoundaryCountry'
+        - $ref: '#/components/parameters/BoundaryRectMinLon'
+        - $ref: '#/components/parameters/BoundaryRectMinLat'
+        - $ref: '#/components/parameters/BoundaryRectMaxLon'
+        - $ref: '#/components/parameters/BoundaryRectMaxLat'
+        - $ref: '#/components/parameters/FocusPointLat'
+        - $ref: '#/components/parameters/FocusPointLon'
+        - $ref: '#/components/parameters/Lang'
+      responses:
+        '200':
+          description: A GeoJSON FeatureCollection of autocomplete suggestions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeocodingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /reverse:
+    get:
+      operationId: reverse
+      tags:
+        - Reverse
+      summary: Reverse geocoding
+      description: >-
+        Convert a latitude/longitude point into the nearest address, venue,
+        or (with the layers parameter) the administrative area that contains
+        it.
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - name: point.lat
+          in: query
+          required: true
+          description: Latitude of the point to reverse geocode.
+          schema:
+            type: number
+            format: double
+          example: -22.95166
+        - name: point.lon
+          in: query
+          required: true
+          description: Longitude of the point to reverse geocode.
+          schema:
+            type: number
+            format: double
+          example: -43.21083
+        - $ref: '#/components/parameters/Size'
+        - $ref: '#/components/parameters/Layers'
+        - $ref: '#/components/parameters/Sources'
+        - $ref: '#/components/parameters/BoundaryCountry'
+        - $ref: '#/components/parameters/BoundaryCircleRadius'
+        - $ref: '#/components/parameters/Lang'
+      responses:
+        '200':
+          description: A GeoJSON FeatureCollection of nearby records.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeocodingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /search/structured:
+    get:
+      operationId: searchStructured
+      tags:
+        - Forward
+      summary: Structured forward geocoding
+      description: >-
+        Forward geocoding from separate address components instead of a single
+        free-text string. At least one component parameter is required.
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - name: address
+          in: query
+          description: Street address including house number, e.g. "10 Downing St".
+          schema:
+            type: string
+          example: 10 Downing St
+        - name: neighbourhood
+          in: query
+          description: Neighbourhood within a locality.
+          schema:
+            type: string
+        - name: borough
+          in: query
+          description: Borough within a locality (e.g. a New York City borough).
+          schema:
+            type: string
+        - name: locality
+          in: query
+          description: City or town.
+          schema:
+            type: string
+          example: London
+        - name: county
+          in: query
+          description: County or administrative subdivision below region.
+          schema:
+            type: string
+        - name: region
+          in: query
+          description: State, province, or region.
+          schema:
+            type: string
+        - name: postalcode
+          in: query
+          description: Postal or ZIP code.
+          schema:
+            type: string
+          example: SW1A 2AA
+        - name: country
+          in: query
+          description: Country name or ISO 3166-1 alpha-2/alpha-3 code.
+          schema:
+            type: string
+          example: GB
+        - $ref: '#/components/parameters/Size'
+        - $ref: '#/components/parameters/Layers'
+        - $ref: '#/components/parameters/Sources'
+        - $ref: '#/components/parameters/Lang'
+      responses:
+        '200':
+          description: A GeoJSON FeatureCollection of geocoding results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeocodingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /place:
+    get:
+      operationId: place
+      tags:
+        - Place
+      summary: Place lookup by gid
+      description: >-
+        Look up one or more records directly by their Geocode Earth global
+        identifier (gid). Multiple ids may be supplied as a comma-separated
+        list.
+      parameters:
+        - $ref: '#/components/parameters/ApiKey'
+        - name: ids
+          in: query
+          required: true
+          description: >-
+            One or more global identifiers (gid) to retrieve, comma-separated.
+          schema:
+            type: string
+          example: whosonfirst:locality:101750367
+        - $ref: '#/components/parameters/Lang'
+      responses:
+        '200':
+          description: A GeoJSON FeatureCollection containing the requested records.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeocodingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: api_key
+      description: Geocode Earth API key passed as the api_key query string parameter.
+  parameters:
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Your Geocode Earth API key.
+      schema:
+        type: string
+    Size:
+      name: size
+      in: query
+      description: Maximum number of results to return (default 10).
+      schema:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 40
+    Layers:
+      name: layers
+      in: query
+      description: >-
+        Comma-separated list of layers to search, e.g. venue, address,
+        street, locality, region, country, or the coarse alias.
+      schema:
+        type: string
+      example: venue,address
+    Sources:
+      name: sources
+      in: query
+      description: >-
+        Comma-separated list of data sources to query, e.g. osm
+        (OpenStreetMap), oa (OpenAddresses), wof (Who's on First), gn
+        (Geonames).
+      schema:
+        type: string
+      example: osm,oa
+    BoundaryCountry:
+      name: boundary.country
+      in: query
+      description: Restrict results to one or more ISO 3166-1 country codes.
+      schema:
+        type: string
+      example: US
+    BoundaryRectMinLon:
+      name: boundary.rect.min_lon
+      in: query
+      description: Minimum longitude of a bounding rectangle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryRectMinLat:
+      name: boundary.rect.min_lat
+      in: query
+      description: Minimum latitude of a bounding rectangle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryRectMaxLon:
+      name: boundary.rect.max_lon
+      in: query
+      description: Maximum longitude of a bounding rectangle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryRectMaxLat:
+      name: boundary.rect.max_lat
+      in: query
+      description: Maximum latitude of a bounding rectangle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryCircleLat:
+      name: boundary.circle.lat
+      in: query
+      description: Latitude of the center of a bounding circle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryCircleLon:
+      name: boundary.circle.lon
+      in: query
+      description: Longitude of the center of a bounding circle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryCircleRadius:
+      name: boundary.circle.radius
+      in: query
+      description: Radius of the bounding circle filter, in kilometers.
+      schema:
+        type: number
+        format: double
+    FocusPointLat:
+      name: focus.point.lat
+      in: query
+      description: Latitude used to prioritize results near a given location.
+      schema:
+        type: number
+        format: double
+    FocusPointLon:
+      name: focus.point.lon
+      in: query
+      description: Longitude used to prioritize results near a given location.
+      schema:
+        type: number
+        format: double
+    Lang:
+      name: lang
+      in: query
+      description: >-
+        Preferred response language as an ISO 639-1 or 639-3 code, used to
+        localize result labels where translations are available.
+      schema:
+        type: string
+      example: en
+  responses:
+    BadRequest:
+      description: The request was malformed or missing a required parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeocodingResponse'
+    Unauthorized:
+      description: The API key was missing or invalid.
+    TooManyRequests:
+      description: The account rate limit or quota was exceeded.
+  schemas:
+    GeocodingResponse:
+      type: object
+      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
+      properties:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingBlock'
+        type:
+          type: string
+          example: FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
+        bbox:
+          type: array
+          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
+          items:
+            type: number
+            format: double
+    GeocodingBlock:
+      type: object
+      description: Metadata about the geocoding request and engine.
+      properties:
+        version:
+          type: string
+          example: '0.2'
+        attribution:
+          type: string
+          example: https://geocode.earth/guidelines
+        query:
+          type: object
+          additionalProperties: true
+          description: Echo of the parsed query parameters used for the request.
+        engine:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Pelias
+            author:
+              type: string
+              example: Geocode Earth
+            version:
+              type: string
+              example: '1.0'
+        timestamp:
+          type: integer
+          format: int64
+          description: Unix epoch timestamp (milliseconds) when the response was generated.
+    Feature:
+      type: object
+      description: A single GeoJSON Feature representing a geocoded record.
+      properties:
+        type:
+          type: string
+          example: Feature
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        properties:
+          $ref: '#/components/schemas/FeatureProperties'
+        bbox:
+          type: array
+          items:
+            type: number
+            format: double
+    Geometry:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Point
+        coordinates:
+          type: array
+          description: Coordinates as [longitude, latitude].
+          items:
+            type: number
+            format: double
+          example:
+            - -73.981929
+            - 40.752663
+    FeatureProperties:
+      type: object
+      description: Descriptive properties for a geocoded record.
+      properties:
+        id:
+          type: string
+          example: '101750367'
+        gid:
+          type: string
+          description: Global identifier usable with the place endpoint.
+          example: whosonfirst:locality:101750367
+        layer:
+          type: string
+          example: venue
+        source:
+          type: string
+          example: osm
+        source_id:
+          type: string
+        country_code:
+          type: string
+          example: US
+        name:
+          type: string
+          example: Empire State Building
+        confidence:
+          type: number
+          format: float
+          example: 0.9
+        match_type:
+          type: string
+          example: exact
+        accuracy:
+          type: string
+          example: point
+        country:
+          type: string
+          example: United States
+        country_gid:
+          type: string
+        region:
+          type: string
+          example: New York
+        region_gid:
+          type: string
+        locality:
+          type: string
+          example: New York
+        locality_gid:
+          type: string
+        postalcode:
+          type: string
+          example: '10018'
+        street:
+          type: string
+          example: 5th Avenue
+        housenumber:
+          type: string
+          example: '476'
+        label:
+          type: string
+          example: Empire State Building, New York, NY, USA

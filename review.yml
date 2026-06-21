@@ -1,0 +1,64 @@
+aid: geocode-earth
+name: Geocode Earth
+review:
+  question: Does Geocode Earth expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Geocode Earth exposes only synchronous request/response REST endpoints.
+    There is no streaming, Server-Sent Events, or event-driven surface to
+    model, so no AsyncAPI document was created.
+findings:
+  summary: |
+    Geocode Earth does not publish a documented public WebSocket API. The
+    service is a hosted build of the open-source Pelias geocoder and exposes
+    only stateless REST (HTTPS) endpoints under
+    https://api.geocode.earth/v1. Every endpoint (search, autocomplete,
+    reverse, search/structured, and place) is an HTTP GET that returns a
+    GeoJSON FeatureCollection in a single response. Authentication is a
+    plain api_key query string parameter. No realtime, bidirectional,
+    push, or streaming (ws:// or wss://) transport is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.geocode.earth/v1
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the Geocode Earth documentation as of the review date.
+  endpointsConfirmedRest:
+    - GET https://api.geocode.earth/v1/search
+    - GET https://api.geocode.earth/v1/autocomplete
+    - GET https://api.geocode.earth/v1/reverse
+    - GET https://api.geocode.earth/v1/search/structured
+    - GET https://api.geocode.earth/v1/place
+sources:
+  - url: https://geocode.earth/docs/
+    type: Documentation
+    note: Documentation index; lists REST base URL https://api.geocode.earth/v1 with no WebSocket surface.
+  - url: https://geocode.earth/docs/forward/search/
+    type: Documentation
+    note: Forward search is an HTTPS GET with api_key and text query parameters.
+  - url: https://geocode.earth/docs/forward/autocomplete/
+    type: Documentation
+    note: Autocomplete is an HTTPS GET; despite type-ahead use, it is a standard request/response, not WebSocket.
+  - url: https://geocode.earth/docs/reverse/reverse/
+    type: Documentation
+    note: Reverse geocoding is an HTTPS GET with point.lat and point.lon query parameters.
+  - url: https://geocode.earth/docs/forward/structured/
+    type: Documentation
+    note: Structured search is an HTTPS GET at /search/structured with component query parameters.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or event-driven protocol surface exists. Geocode Earth is a
+    purely synchronous REST geocoding API, so no AsyncAPI document was
+    authored. The apis.yml catalogs the five REST APIs with their OpenAPI,
+    Postman, and Open Collection artifacts.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

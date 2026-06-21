@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Geocode Earth API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "in": "query",
+      "value": "{{apiKey}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forward",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Forward geocoding (search)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/search?api_key={{apiKey}}&text=476 5th Avenue, New York, NY 10018"
+          },
+          "docs": "Turn a free-text place or address string into structured GeoJSON results with coordinates, ranked by relevance."
+        },
+        {
+          "info": {
+            "name": "Autocomplete (type-ahead) geocoding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/autocomplete?api_key={{apiKey}}&text=lond&focus.point.lat=38.82&focus.point.lon=-77.01"
+          },
+          "docs": "Type-ahead geocoding optimized for partial, real-time user input, returning ranked suggestions as the user types."
+        },
+        {
+          "info": {
+            "name": "Structured forward geocoding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/search/structured?api_key={{apiKey}}&address=10 Downing St&locality=London&postalcode=SW1A 2AA&country=GB"
+          },
+          "docs": "Forward geocoding from separate address components instead of a single free-text string."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reverse",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Reverse geocoding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/reverse?api_key={{apiKey}}&point.lat=-22.95166&point.lon=-43.21083"
+          },
+          "docs": "Convert a latitude/longitude point into the nearest address, venue, or the administrative area that contains it."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Place",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Place lookup by gid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/place?api_key={{apiKey}}&ids=whosonfirst:locality:101750367"
+          },
+          "docs": "Look up one or more records directly by their Geocode Earth global identifier (gid)."
+        }
+      ]
+    }
+  ]
+}
