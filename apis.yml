@@ -125,6 +125,10 @@ apis:
   description: Looks up one or more records directly by their Geocode Earth global
     identifier (gid), returning the full GeoJSON feature without running a search.
 common:
+- type: DomainSecurity
+  url: security/geocode-earth-domain-security.yml
+- type: Authentication
+  url: authentication/geocode-earth-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/pelias
 - type: LinkedIn
@@ -139,6 +143,8 @@ common:
   url: rate-limits/geocode-earth-rate-limits.yml
 - type: FinOps
   url: finops/geocode-earth-finops.yml
+- type: Blog
+  url: https://geocode.earth/feed.xml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
