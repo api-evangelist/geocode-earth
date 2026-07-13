@@ -1,0 +1,13 @@
+{
+  "repo": "geocode-earth",
+  "feeds": [
+    {
+      "source": "https://geocode.earth/feed.xml",
+      "feed_url": "https://geocode.earth/feed.xml",
+      "title": "Geocode Earth Blog",
+      "saved": 1
+    }
+  ],
+  "fetched": "2026-07-11T11:43:46Z",
+  "post_count": 11
+}
