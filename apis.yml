@@ -125,6 +125,8 @@ apis:
   description: Looks up one or more records directly by their Geocode Earth global
     identifier (gid), returning the full GeoJSON feature without running a search.
 common:
+- type: AgenticAccess
+  url: agentic-access/geocode-earth-agentic-access.yml
 - type: DomainSecurity
   url: security/geocode-earth-domain-security.yml
 - type: Authentication
