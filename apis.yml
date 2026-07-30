@@ -7,7 +7,20 @@ description: Geocode Earth is a hosted geocoding and address autocomplete API bu
   (search), autocomplete, reverse, and structured geocoding plus place lookup over
   fully open data (OpenStreetMap, OpenAddresses, Who's on First, and Geonames), with
   results that can be stored without restrictive licensing.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: open
+  trial: true
+  try_now: true
+  public: true
+  label: Freemium (free trial) · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/geocode-earth.png
 tags:
 - Geocoding
 - Address Autocomplete
@@ -19,111 +32,84 @@ created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.19'
 apis:
-- aid: geocode-earth:search
-  name: Geocode Earth Search API
-  tags:
-  - Geocoding
-  - Forward
-  - Search
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: geocode-earth:geocode-earth-forward-api
+  name: Geocode Earth Forward API
+  description: The Forward API from Geocode Earth — 3 operation(s) for forward.
   humanURL: https://geocode.earth/docs/forward/search/
   baseURL: https://api.geocode.earth/v1
-  properties:
-  - url: https://geocode.earth/docs/forward/search/
-    type: Documentation
-  - url: https://geocode.earth/docs/
-    type: APIReference
-  - url: openapi/geocode-earth-openapi.yml
-    type: OpenAPI
-  - url: collections/geocode-earth.postman_collection.json
-    type: PostmanCollection
-  - url: collections/geocode-earth.opencollection.json
-    type: OpenCollection
-  description: Forward geocoding that turns a free-text place or address string into
-    structured GeoJSON results with coordinates, ranked by relevance and filterable
-    by country, layer, and source.
-- aid: geocode-earth:autocomplete
-  name: Geocode Earth Autocomplete API
   tags:
-  - Autocomplete
-  - Typeahead
   - Forward
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://geocode.earth/docs/forward/autocomplete/
-  baseURL: https://api.geocode.earth/v1
   properties:
-  - url: https://geocode.earth/docs/forward/autocomplete/
-    type: Documentation
-  - url: openapi/geocode-earth-openapi.yml
-    type: OpenAPI
-  - url: collections/geocode-earth.postman_collection.json
-    type: PostmanCollection
-  - url: collections/geocode-earth.opencollection.json
-    type: OpenCollection
-  description: Type-ahead geocoding optimized for partial, real-time user input,
-    returning ranked suggestions as the user types and supporting focus.point to
-    prefer nearby results.
-- aid: geocode-earth:reverse
-  name: Geocode Earth Reverse API
-  tags:
-  - Reverse Geocoding
-  - Coordinates
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://geocode.earth/docs/reverse/reverse/
-  baseURL: https://api.geocode.earth/v1
-  properties:
-  - url: https://geocode.earth/docs/reverse/reverse/
-    type: Documentation
-  - url: openapi/geocode-earth-openapi.yml
-    type: OpenAPI
-  - url: collections/geocode-earth.postman_collection.json
-    type: PostmanCollection
-  - url: collections/geocode-earth.opencollection.json
-    type: OpenCollection
-  description: Reverse geocoding that converts a latitude/longitude point into the
-    nearest address, venue, or (with the layers parameter) the administrative area
-    that contains it.
-- aid: geocode-earth:structured-search
-  name: Geocode Earth Structured Search API
-  tags:
-  - Structured
-  - Geocoding
-  - Forward
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://geocode.earth/docs/forward/structured/
-  baseURL: https://api.geocode.earth/v1
-  properties:
-  - url: https://geocode.earth/docs/forward/structured/
-    type: Documentation
-  - url: openapi/geocode-earth-openapi.yml
-    type: OpenAPI
-  - url: collections/geocode-earth.postman_collection.json
-    type: PostmanCollection
-  - url: collections/geocode-earth.opencollection.json
-    type: OpenCollection
-  description: Forward geocoding from separate address components (address, locality,
-    region, postalcode, country, and more) instead of a single free-text string,
-    for cases where structured fields are already known.
-- aid: geocode-earth:place
+  - type: OpenAPI
+    url: openapi/geocode-earth-forward-api-openapi.yml
+  - type: Documentation
+    url: https://geocode.earth/docs/forward/search/
+  - type: APIReference
+    url: https://geocode.earth/docs/
+  - type: PostmanCollection
+    url: collections/geocode-earth.postman_collection.json
+  - type: OpenCollection
+    url: collections/geocode-earth.opencollection.json
+  - type: Documentation
+    url: https://geocode.earth/docs/forward/autocomplete/
+  - type: Documentation
+    url: https://geocode.earth/docs/reverse/reverse/
+  - type: Documentation
+    url: https://geocode.earth/docs/forward/structured/
+  - type: Documentation
+    url: https://geocode.earth/docs/
+- aid: geocode-earth:geocode-earth-place-api
   name: Geocode Earth Place API
+  description: The Place API from Geocode Earth — 1 operation(s) for place.
+  humanURL: https://geocode.earth/docs/forward/search/
+  baseURL: https://api.geocode.earth/v1
   tags:
   - Place
-  - Lookup
-  - GID
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://geocode.earth/docs/
-  baseURL: https://api.geocode.earth/v1
   properties:
-  - url: https://geocode.earth/docs/
-    type: Documentation
-  - url: openapi/geocode-earth-openapi.yml
-    type: OpenAPI
-  - url: collections/geocode-earth.postman_collection.json
-    type: PostmanCollection
-  - url: collections/geocode-earth.opencollection.json
-    type: OpenCollection
-  description: Looks up one or more records directly by their Geocode Earth global
-    identifier (gid), returning the full GeoJSON feature without running a search.
+  - type: OpenAPI
+    url: openapi/geocode-earth-place-api-openapi.yml
+  - type: Documentation
+    url: https://geocode.earth/docs/forward/search/
+  - type: APIReference
+    url: https://geocode.earth/docs/
+  - type: PostmanCollection
+    url: collections/geocode-earth.postman_collection.json
+  - type: OpenCollection
+    url: collections/geocode-earth.opencollection.json
+  - type: Documentation
+    url: https://geocode.earth/docs/forward/autocomplete/
+  - type: Documentation
+    url: https://geocode.earth/docs/reverse/reverse/
+  - type: Documentation
+    url: https://geocode.earth/docs/forward/structured/
+  - type: Documentation
+    url: https://geocode.earth/docs/
+- aid: geocode-earth:geocode-earth-reverse-api
+  name: Geocode Earth Reverse API
+  description: The Reverse API from Geocode Earth — 1 operation(s) for reverse.
+  humanURL: https://geocode.earth/docs/forward/search/
+  baseURL: https://api.geocode.earth/v1
+  tags:
+  - Reverse
+  properties:
+  - type: OpenAPI
+    url: openapi/geocode-earth-reverse-api-openapi.yml
+  - type: Documentation
+    url: https://geocode.earth/docs/forward/search/
+  - type: APIReference
+    url: https://geocode.earth/docs/
+  - type: PostmanCollection
+    url: collections/geocode-earth.postman_collection.json
+  - type: OpenCollection
+    url: collections/geocode-earth.opencollection.json
+  - type: Documentation
+    url: https://geocode.earth/docs/forward/autocomplete/
+  - type: Documentation
+    url: https://geocode.earth/docs/reverse/reverse/
+  - type: Documentation
+    url: https://geocode.earth/docs/forward/structured/
+  - type: Documentation
+    url: https://geocode.earth/docs/
 common:
 - type: AgenticAccess
   url: agentic-access/geocode-earth-agentic-access.yml
