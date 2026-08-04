@@ -1,0 +1,18 @@
+{
+  "provider": "geocode-earth",
+  "sources": [
+    "geocode-earth-forward-api-openapi.yml",
+    "geocode-earth-place-api-openapi.yml",
+    "geocode-earth-reverse-api-openapi.yml"
+  ],
+  "outputs": [
+    "geocode-earth-forward-api-openapi.yml",
+    "geocode-earth-place-api-openapi.yml",
+    "geocode-earth-reverse-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
