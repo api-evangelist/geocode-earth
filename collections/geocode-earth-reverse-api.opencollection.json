@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Geocode Earth Forward Reverse API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reverse",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Reverse geocoding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/reverse",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Geocode Earth API key."
+              },
+              {
+                "name": "point.lat",
+                "value": "-22.95166",
+                "type": "query",
+                "description": "Latitude of the point to reverse geocode."
+              },
+              {
+                "name": "point.lon",
+                "value": "-43.21083",
+                "type": "query",
+                "description": "Longitude of the point to reverse geocode."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (default 10)."
+              },
+              {
+                "name": "layers",
+                "value": "venue,address",
+                "type": "query",
+                "description": "Comma-separated list of layers to search, e.g. venue, address, street, locality, region, country, or the coarse alias."
+              },
+              {
+                "name": "sources",
+                "value": "osm,oa",
+                "type": "query",
+                "description": "Comma-separated list of data sources to query, e.g. osm (OpenStreetMap), oa (OpenAddresses), wof (Who's on First), gn (Geonames)."
+              },
+              {
+                "name": "boundary.country",
+                "value": "US",
+                "type": "query",
+                "description": "Restrict results to one or more ISO 3166-1 country codes."
+              },
+              {
+                "name": "boundary.circle.radius",
+                "value": "",
+                "type": "query",
+                "description": "Radius of the bounding circle filter, in kilometers."
+              },
+              {
+                "name": "lang",
+                "value": "en",
+                "type": "query",
+                "description": "Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available."
+              }
+            ]
+          },
+          "docs": "Convert a latitude/longitude point into the nearest address, venue, or (with the layers parameter) the administrative area that contains it."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

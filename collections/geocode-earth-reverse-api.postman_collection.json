@@ -1,0 +1,431 @@
+{
+  "item": [
+    {
+      "id": "de35a84c-702c-4f4e-8535-82bb1c1c3ac2",
+      "name": "Reverse",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "16072b55-9b01-457d-b50a-ea7515801a2e",
+          "name": "Reverse geocoding",
+          "request": {
+            "name": "Reverse geocoding",
+            "description": {
+              "content": "Convert a latitude/longitude point into the nearest address, venue, or (with the layers parameter) the administrative area that contains it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reverse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your Geocode Earth API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "point.lat",
+                  "value": "<double>",
+                  "description": "(Required) Latitude of the point to reverse geocode."
+                },
+                {
+                  "disabled": false,
+                  "key": "point.lon",
+                  "value": "<double>",
+                  "description": "(Required) Longitude of the point to reverse geocode."
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Maximum number of results to return (default 10)."
+                },
+                {
+                  "disabled": false,
+                  "key": "layers",
+                  "value": "<string>",
+                  "description": "Comma-separated list of layers to search, e.g. venue, address, street, locality, region, country, or the coarse alias."
+                },
+                {
+                  "disabled": false,
+                  "key": "sources",
+                  "value": "<string>",
+                  "description": "Comma-separated list of data sources to query, e.g. osm (OpenStreetMap), oa (OpenAddresses), wof (Who's on First), gn (Geonames)."
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.country",
+                  "value": "<string>",
+                  "description": "Restrict results to one or more ISO 3166-1 country codes."
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.circle.radius",
+                  "value": "<double>",
+                  "description": "Radius of the bounding circle filter, in kilometers."
+                },
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "<string>",
+                  "description": "Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22c4c3ea-e3fa-48ad-a676-87b0c069ce45",
+              "name": "A GeoJSON FeatureCollection of nearby records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point.lat",
+                      "value": "-22.95166"
+                    },
+                    {
+                      "key": "point.lon",
+                      "value": "-43.21083"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "layers",
+                      "value": "venue,address"
+                    },
+                    {
+                      "key": "sources",
+                      "value": "osm,oa"
+                    },
+                    {
+                      "key": "boundary.country",
+                      "value": "US"
+                    },
+                    {
+                      "key": "boundary.circle.radius",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"geocoding\": {\n    \"version\": \"0.2\",\n    \"attribution\": \"https://geocode.earth/guidelines\",\n    \"query\": {\n      \"key_0\": 3784,\n      \"key_1\": \"string\"\n    },\n    \"engine\": {\n      \"name\": \"Pelias\",\n      \"author\": \"Geocode Earth\",\n      \"version\": \"1.0\"\n    },\n    \"timestamp\": 7507\n  },\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -73.981929,\n          40.752663\n        ]\n      },\n      \"properties\": {\n        \"id\": \"101750367\",\n        \"gid\": \"whosonfirst:locality:101750367\",\n        \"layer\": \"venue\",\n        \"source\": \"osm\",\n        \"source_id\": \"string\",\n        \"country_code\": \"US\",\n        \"name\": \"Empire State Building\",\n        \"confidence\": 0.9,\n        \"match_type\": \"exact\",\n        \"accuracy\": \"point\",\n        \"country\": \"United States\",\n        \"country_gid\": \"string\",\n        \"region\": \"New York\",\n        \"region_gid\": \"string\",\n        \"locality\": \"New York\",\n        \"locality_gid\": \"string\",\n        \"postalcode\": \"10018\",\n        \"street\": \"5th Avenue\",\n        \"housenumber\": \"476\",\n        \"label\": \"Empire State Building, New York, NY, USA\"\n      },\n      \"bbox\": [\n        4599.661304399724,\n        9356.63369082741\n      ]\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -73.981929,\n          40.752663\n        ]\n      },\n      \"properties\": {\n        \"id\": \"101750367\",\n        \"gid\": \"whosonfirst:locality:101750367\",\n        \"layer\": \"venue\",\n        \"source\": \"osm\",\n        \"source_id\": \"string\",\n        \"country_code\": \"US\",\n        \"name\": \"Empire State Building\",\n        \"confidence\": 0.9,\n        \"match_type\": \"exact\",\n        \"accuracy\": \"point\",\n        \"country\": \"United States\",\n        \"country_gid\": \"string\",\n        \"region\": \"New York\",\n        \"region_gid\": \"string\",\n        \"locality\": \"New York\",\n        \"locality_gid\": \"string\",\n        \"postalcode\": \"10018\",\n        \"street\": \"5th Avenue\",\n        \"housenumber\": \"476\",\n        \"label\": \"Empire State Building, New York, NY, USA\"\n      },\n      \"bbox\": [\n        8103.841562331278,\n        3004.840913238869\n      ]\n    }\n  ],\n  \"bbox\": [\n    2680.6587654159775,\n    4483.570767430678\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "306413aa-741b-4a24-a7ab-926bddcfc05c",
+              "name": "The request was malformed or missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point.lat",
+                      "value": "-22.95166"
+                    },
+                    {
+                      "key": "point.lon",
+                      "value": "-43.21083"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "layers",
+                      "value": "venue,address"
+                    },
+                    {
+                      "key": "sources",
+                      "value": "osm,oa"
+                    },
+                    {
+                      "key": "boundary.country",
+                      "value": "US"
+                    },
+                    {
+                      "key": "boundary.circle.radius",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"geocoding\": {\n    \"version\": \"0.2\",\n    \"attribution\": \"https://geocode.earth/guidelines\",\n    \"query\": {\n      \"key_0\": 6632.514472656302,\n      \"key_1\": 4349.903273901875,\n      \"key_2\": 2655\n    },\n    \"engine\": {\n      \"name\": \"Pelias\",\n      \"author\": \"Geocode Earth\",\n      \"version\": \"1.0\"\n    },\n    \"timestamp\": 5549\n  },\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -73.981929,\n          40.752663\n        ]\n      },\n      \"properties\": {\n        \"id\": \"101750367\",\n        \"gid\": \"whosonfirst:locality:101750367\",\n        \"layer\": \"venue\",\n        \"source\": \"osm\",\n        \"source_id\": \"string\",\n        \"country_code\": \"US\",\n        \"name\": \"Empire State Building\",\n        \"confidence\": 0.9,\n        \"match_type\": \"exact\",\n        \"accuracy\": \"point\",\n        \"country\": \"United States\",\n        \"country_gid\": \"string\",\n        \"region\": \"New York\",\n        \"region_gid\": \"string\",\n        \"locality\": \"New York\",\n        \"locality_gid\": \"string\",\n        \"postalcode\": \"10018\",\n        \"street\": \"5th Avenue\",\n        \"housenumber\": \"476\",\n        \"label\": \"Empire State Building, New York, NY, USA\"\n      },\n      \"bbox\": [\n        3870.077951237172,\n        4422.139453156444\n      ]\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -73.981929,\n          40.752663\n        ]\n      },\n      \"properties\": {\n        \"id\": \"101750367\",\n        \"gid\": \"whosonfirst:locality:101750367\",\n        \"layer\": \"venue\",\n        \"source\": \"osm\",\n        \"source_id\": \"string\",\n        \"country_code\": \"US\",\n        \"name\": \"Empire State Building\",\n        \"confidence\": 0.9,\n        \"match_type\": \"exact\",\n        \"accuracy\": \"point\",\n        \"country\": \"United States\",\n        \"country_gid\": \"string\",\n        \"region\": \"New York\",\n        \"region_gid\": \"string\",\n        \"locality\": \"New York\",\n        \"locality_gid\": \"string\",\n        \"postalcode\": \"10018\",\n        \"street\": \"5th Avenue\",\n        \"housenumber\": \"476\",\n        \"label\": \"Empire State Building, New York, NY, USA\"\n      },\n      \"bbox\": [\n        5673.868231457296,\n        8669.627932277308\n      ]\n    }\n  ],\n  \"bbox\": [\n    5814.903827355233,\n    899.7021770305424\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41ebfff0-0dbe-4e0d-be30-cb73bf9689d4",
+              "name": "The API key was missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point.lat",
+                      "value": "-22.95166"
+                    },
+                    {
+                      "key": "point.lon",
+                      "value": "-43.21083"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "layers",
+                      "value": "venue,address"
+                    },
+                    {
+                      "key": "sources",
+                      "value": "osm,oa"
+                    },
+                    {
+                      "key": "boundary.country",
+                      "value": "US"
+                    },
+                    {
+                      "key": "boundary.circle.radius",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5bbe5498-732c-41f2-b1c8-cdd19d6b6a98",
+              "name": "The account rate limit or quota was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point.lat",
+                      "value": "-22.95166"
+                    },
+                    {
+                      "key": "point.lon",
+                      "value": "-43.21083"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "layers",
+                      "value": "venue,address"
+                    },
+                    {
+                      "key": "sources",
+                      "value": "osm,oa"
+                    },
+                    {
+                      "key": "boundary.country",
+                      "value": "US"
+                    },
+                    {
+                      "key": "boundary.circle.radius",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.geocode.earth/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2f2c7fdb-f254-4dfe-b29d-94ec3320b03f",
+    "name": "Geocode Earth Forward Reverse API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Hosted geocoding and address autocomplete API built on the open-source Pelias geocoder. Provides forward (search), autocomplete, reverse, and structured geocoding plus place lookup over open data sources (OpenStreetMap, OpenAddresses, Who's on First, and Geonames). All responses are GeoJSON FeatureCollections. Authentication is via an api_key query string parameter.\n\nContact Support:\n Name: Geocode Earth Support\n Email: hello@geocode.earth",
+      "type": "text/plain"
+    }
+  }
+}

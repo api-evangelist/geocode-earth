@@ -1,0 +1,311 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Geocode Earth Forward API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forward",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Forward geocoding (search)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/search",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Geocode Earth API key."
+              },
+              {
+                "name": "text",
+                "value": "476 5th Avenue, New York, NY 10018",
+                "type": "query",
+                "description": "The place or address to search for."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (default 10)."
+              },
+              {
+                "name": "layers",
+                "value": "venue,address",
+                "type": "query",
+                "description": "Comma-separated list of layers to search, e.g. venue, address, street, locality, region, country, or the coarse alias."
+              },
+              {
+                "name": "sources",
+                "value": "osm,oa",
+                "type": "query",
+                "description": "Comma-separated list of data sources to query, e.g. osm (OpenStreetMap), oa (OpenAddresses), wof (Who's on First), gn (Geonames)."
+              },
+              {
+                "name": "boundary.country",
+                "value": "US",
+                "type": "query",
+                "description": "Restrict results to one or more ISO 3166-1 country codes."
+              },
+              {
+                "name": "boundary.rect.min_lon",
+                "value": "",
+                "type": "query",
+                "description": "Minimum longitude of a bounding rectangle filter."
+              },
+              {
+                "name": "boundary.rect.min_lat",
+                "value": "",
+                "type": "query",
+                "description": "Minimum latitude of a bounding rectangle filter."
+              },
+              {
+                "name": "boundary.rect.max_lon",
+                "value": "",
+                "type": "query",
+                "description": "Maximum longitude of a bounding rectangle filter."
+              },
+              {
+                "name": "boundary.rect.max_lat",
+                "value": "",
+                "type": "query",
+                "description": "Maximum latitude of a bounding rectangle filter."
+              },
+              {
+                "name": "boundary.circle.lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the center of a bounding circle filter."
+              },
+              {
+                "name": "boundary.circle.lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the center of a bounding circle filter."
+              },
+              {
+                "name": "boundary.circle.radius",
+                "value": "",
+                "type": "query",
+                "description": "Radius of the bounding circle filter, in kilometers."
+              },
+              {
+                "name": "focus.point.lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude used to prioritize results near a given location."
+              },
+              {
+                "name": "focus.point.lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude used to prioritize results near a given location."
+              },
+              {
+                "name": "lang",
+                "value": "en",
+                "type": "query",
+                "description": "Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available."
+              }
+            ]
+          },
+          "docs": "Turn a free-text place or address string into structured GeoJSON results with coordinates, ranked by relevance."
+        },
+        {
+          "info": {
+            "name": "Autocomplete (type-ahead) geocoding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/autocomplete",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Geocode Earth API key."
+              },
+              {
+                "name": "text",
+                "value": "lond",
+                "type": "query",
+                "description": "The partial search input from the user."
+              },
+              {
+                "name": "layers",
+                "value": "venue,address",
+                "type": "query",
+                "description": "Comma-separated list of layers to search, e.g. venue, address, street, locality, region, country, or the coarse alias."
+              },
+              {
+                "name": "sources",
+                "value": "osm,oa",
+                "type": "query",
+                "description": "Comma-separated list of data sources to query, e.g. osm (OpenStreetMap), oa (OpenAddresses), wof (Who's on First), gn (Geonames)."
+              },
+              {
+                "name": "boundary.country",
+                "value": "US",
+                "type": "query",
+                "description": "Restrict results to one or more ISO 3166-1 country codes."
+              },
+              {
+                "name": "boundary.rect.min_lon",
+                "value": "",
+                "type": "query",
+                "description": "Minimum longitude of a bounding rectangle filter."
+              },
+              {
+                "name": "boundary.rect.min_lat",
+                "value": "",
+                "type": "query",
+                "description": "Minimum latitude of a bounding rectangle filter."
+              },
+              {
+                "name": "boundary.rect.max_lon",
+                "value": "",
+                "type": "query",
+                "description": "Maximum longitude of a bounding rectangle filter."
+              },
+              {
+                "name": "boundary.rect.max_lat",
+                "value": "",
+                "type": "query",
+                "description": "Maximum latitude of a bounding rectangle filter."
+              },
+              {
+                "name": "focus.point.lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude used to prioritize results near a given location."
+              },
+              {
+                "name": "focus.point.lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude used to prioritize results near a given location."
+              },
+              {
+                "name": "lang",
+                "value": "en",
+                "type": "query",
+                "description": "Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available."
+              }
+            ]
+          },
+          "docs": "Type-ahead geocoding optimized for partial, real-time user input. Returns ranked suggestions as the user types."
+        },
+        {
+          "info": {
+            "name": "Structured forward geocoding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/search/structured",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Geocode Earth API key."
+              },
+              {
+                "name": "address",
+                "value": "10 Downing St",
+                "type": "query",
+                "description": "Street address including house number, e.g. \"10 Downing St\"."
+              },
+              {
+                "name": "neighbourhood",
+                "value": "",
+                "type": "query",
+                "description": "Neighbourhood within a locality."
+              },
+              {
+                "name": "borough",
+                "value": "",
+                "type": "query",
+                "description": "Borough within a locality (e.g. a New York City borough)."
+              },
+              {
+                "name": "locality",
+                "value": "London",
+                "type": "query",
+                "description": "City or town."
+              },
+              {
+                "name": "county",
+                "value": "",
+                "type": "query",
+                "description": "County or administrative subdivision below region."
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "State, province, or region."
+              },
+              {
+                "name": "postalcode",
+                "value": "SW1A 2AA",
+                "type": "query",
+                "description": "Postal or ZIP code."
+              },
+              {
+                "name": "country",
+                "value": "GB",
+                "type": "query",
+                "description": "Country name or ISO 3166-1 alpha-2/alpha-3 code."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (default 10)."
+              },
+              {
+                "name": "layers",
+                "value": "venue,address",
+                "type": "query",
+                "description": "Comma-separated list of layers to search, e.g. venue, address, street, locality, region, country, or the coarse alias."
+              },
+              {
+                "name": "sources",
+                "value": "osm,oa",
+                "type": "query",
+                "description": "Comma-separated list of data sources to query, e.g. osm (OpenStreetMap), oa (OpenAddresses), wof (Who's on First), gn (Geonames)."
+              },
+              {
+                "name": "lang",
+                "value": "en",
+                "type": "query",
+                "description": "Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available."
+              }
+            ]
+          },
+          "docs": "Forward geocoding from separate address components instead of a single free-text string. At least one component parameter is required."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

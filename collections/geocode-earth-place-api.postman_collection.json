@@ -1,0 +1,299 @@
+{
+  "item": [
+    {
+      "id": "6c78b022-1322-4e0a-9adf-5b19b41af932",
+      "name": "Place",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "de7ecc45-8314-49f3-b94e-e386e5496b65",
+          "name": "Place lookup by gid",
+          "request": {
+            "name": "Place lookup by gid",
+            "description": {
+              "content": "Look up one or more records directly by their Geocode Earth global identifier (gid). Multiple ids may be supplied as a comma-separated list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "place"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) Your Geocode Earth API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "(Required) One or more global identifiers (gid) to retrieve, comma-separated."
+                },
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "<string>",
+                  "description": "Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16a2e3de-62ec-49e9-a10b-401c0ac4a732",
+              "name": "A GeoJSON FeatureCollection containing the requested records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "whosonfirst:locality:101750367"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"geocoding\": {\n    \"version\": \"0.2\",\n    \"attribution\": \"https://geocode.earth/guidelines\",\n    \"query\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": false\n    },\n    \"engine\": {\n      \"name\": \"Pelias\",\n      \"author\": \"Geocode Earth\",\n      \"version\": \"1.0\"\n    },\n    \"timestamp\": 1854\n  },\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -73.981929,\n          40.752663\n        ]\n      },\n      \"properties\": {\n        \"id\": \"101750367\",\n        \"gid\": \"whosonfirst:locality:101750367\",\n        \"layer\": \"venue\",\n        \"source\": \"osm\",\n        \"source_id\": \"string\",\n        \"country_code\": \"US\",\n        \"name\": \"Empire State Building\",\n        \"confidence\": 0.9,\n        \"match_type\": \"exact\",\n        \"accuracy\": \"point\",\n        \"country\": \"United States\",\n        \"country_gid\": \"string\",\n        \"region\": \"New York\",\n        \"region_gid\": \"string\",\n        \"locality\": \"New York\",\n        \"locality_gid\": \"string\",\n        \"postalcode\": \"10018\",\n        \"street\": \"5th Avenue\",\n        \"housenumber\": \"476\",\n        \"label\": \"Empire State Building, New York, NY, USA\"\n      },\n      \"bbox\": [\n        6272.463991383684,\n        9479.769307530605\n      ]\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -73.981929,\n          40.752663\n        ]\n      },\n      \"properties\": {\n        \"id\": \"101750367\",\n        \"gid\": \"whosonfirst:locality:101750367\",\n        \"layer\": \"venue\",\n        \"source\": \"osm\",\n        \"source_id\": \"string\",\n        \"country_code\": \"US\",\n        \"name\": \"Empire State Building\",\n        \"confidence\": 0.9,\n        \"match_type\": \"exact\",\n        \"accuracy\": \"point\",\n        \"country\": \"United States\",\n        \"country_gid\": \"string\",\n        \"region\": \"New York\",\n        \"region_gid\": \"string\",\n        \"locality\": \"New York\",\n        \"locality_gid\": \"string\",\n        \"postalcode\": \"10018\",\n        \"street\": \"5th Avenue\",\n        \"housenumber\": \"476\",\n        \"label\": \"Empire State Building, New York, NY, USA\"\n      },\n      \"bbox\": [\n        6611.657599337438,\n        5595.0823360104605\n      ]\n    }\n  ],\n  \"bbox\": [\n    2074.7878996411196,\n    9411.128777096099\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef2ce6d8-fac7-4442-bd65-ae04f1c4d528",
+              "name": "The request was malformed or missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "whosonfirst:locality:101750367"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"geocoding\": {\n    \"version\": \"0.2\",\n    \"attribution\": \"https://geocode.earth/guidelines\",\n    \"query\": {\n      \"key_0\": 4975.317741741835,\n      \"key_1\": true\n    },\n    \"engine\": {\n      \"name\": \"Pelias\",\n      \"author\": \"Geocode Earth\",\n      \"version\": \"1.0\"\n    },\n    \"timestamp\": 2903\n  },\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -73.981929,\n          40.752663\n        ]\n      },\n      \"properties\": {\n        \"id\": \"101750367\",\n        \"gid\": \"whosonfirst:locality:101750367\",\n        \"layer\": \"venue\",\n        \"source\": \"osm\",\n        \"source_id\": \"string\",\n        \"country_code\": \"US\",\n        \"name\": \"Empire State Building\",\n        \"confidence\": 0.9,\n        \"match_type\": \"exact\",\n        \"accuracy\": \"point\",\n        \"country\": \"United States\",\n        \"country_gid\": \"string\",\n        \"region\": \"New York\",\n        \"region_gid\": \"string\",\n        \"locality\": \"New York\",\n        \"locality_gid\": \"string\",\n        \"postalcode\": \"10018\",\n        \"street\": \"5th Avenue\",\n        \"housenumber\": \"476\",\n        \"label\": \"Empire State Building, New York, NY, USA\"\n      },\n      \"bbox\": [\n        523.2733361432018,\n        7365.200854436429\n      ]\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -73.981929,\n          40.752663\n        ]\n      },\n      \"properties\": {\n        \"id\": \"101750367\",\n        \"gid\": \"whosonfirst:locality:101750367\",\n        \"layer\": \"venue\",\n        \"source\": \"osm\",\n        \"source_id\": \"string\",\n        \"country_code\": \"US\",\n        \"name\": \"Empire State Building\",\n        \"confidence\": 0.9,\n        \"match_type\": \"exact\",\n        \"accuracy\": \"point\",\n        \"country\": \"United States\",\n        \"country_gid\": \"string\",\n        \"region\": \"New York\",\n        \"region_gid\": \"string\",\n        \"locality\": \"New York\",\n        \"locality_gid\": \"string\",\n        \"postalcode\": \"10018\",\n        \"street\": \"5th Avenue\",\n        \"housenumber\": \"476\",\n        \"label\": \"Empire State Building, New York, NY, USA\"\n      },\n      \"bbox\": [\n        6950.01778626362,\n        7295.70144433334\n      ]\n    }\n  ],\n  \"bbox\": [\n    608.0719711483007,\n    8899.468755541538\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "492df247-02a8-4653-9414-20cc0b9fad58",
+              "name": "The API key was missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "whosonfirst:locality:101750367"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9b432821-c758-4be2-bcf2-89e005475735",
+              "name": "The account rate limit or quota was exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "whosonfirst:locality:101750367"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.geocode.earth/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f784af87-6f68-4b89-b9aa-e35a576eb394",
+    "name": "Geocode Earth Forward Place API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Hosted geocoding and address autocomplete API built on the open-source Pelias geocoder. Provides forward (search), autocomplete, reverse, and structured geocoding plus place lookup over open data sources (OpenStreetMap, OpenAddresses, Who's on First, and Geonames). All responses are GeoJSON FeatureCollections. Authentication is via an api_key query string parameter.\n\nContact Support:\n Name: Geocode Earth Support\n Email: hello@geocode.earth",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Geocode Earth Forward Place API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Place",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Place lookup by gid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/place",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Your Geocode Earth API key."
+              },
+              {
+                "name": "ids",
+                "value": "whosonfirst:locality:101750367",
+                "type": "query",
+                "description": "One or more global identifiers (gid) to retrieve, comma-separated."
+              },
+              {
+                "name": "lang",
+                "value": "en",
+                "type": "query",
+                "description": "Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available."
+              }
+            ]
+          },
+          "docs": "Look up one or more records directly by their Geocode Earth global identifier (gid). Multiple ids may be supplied as a comma-separated list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
