@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Geocode Earth Forward Reverse API
+  title: Geocode Earth Reverse API
   description: Hosted geocoding and address autocomplete API built on the open-source Pelias geocoder. Provides forward (search), autocomplete, reverse, and structured geocoding plus place lookup over open data sources (OpenStreetMap, OpenAddresses, Who's on First, and Geonames). All responses are GeoJSON FeatureCollections. Authentication is via an api_key query string parameter.
   termsOfService: https://geocode.earth/terms/
   contact:
@@ -61,42 +61,18 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  responses:
+    BadRequest:
+      description: The request was malformed or missing a required parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeocodingResponse'
+    Unauthorized:
+      description: The API key was missing or invalid.
+    TooManyRequests:
+      description: The account rate limit or quota was exceeded.
   parameters:
-    Sources:
-      name: sources
-      in: query
-      description: Comma-separated list of data sources to query, e.g. osm (OpenStreetMap), oa (OpenAddresses), wof (Who's on First), gn (Geonames).
-      schema:
-        type: string
-      example: osm,oa
-    Layers:
-      name: layers
-      in: query
-      description: Comma-separated list of layers to search, e.g. venue, address, street, locality, region, country, or the coarse alias.
-      schema:
-        type: string
-      example: venue,address
-    Lang:
-      name: lang
-      in: query
-      description: Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available.
-      schema:
-        type: string
-      example: en
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: Your Geocode Earth API key.
-      schema:
-        type: string
-    BoundaryCountry:
-      name: boundary.country
-      in: query
-      description: Restrict results to one or more ISO 3166-1 country codes.
-      schema:
-        type: string
-      example: US
     Size:
       name: size
       in: query
@@ -106,6 +82,20 @@ components:
         default: 10
         minimum: 1
         maximum: 40
+    Layers:
+      name: layers
+      in: query
+      description: Comma-separated list of layers to search, e.g. venue, address, street, locality, region, country, or the coarse alias.
+      schema:
+        type: string
+      example: venue,address
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Your Geocode Earth API key.
+      schema:
+        type: string
     BoundaryCircleRadius:
       name: boundary.circle.radius
       in: query
@@ -113,41 +103,58 @@ components:
       schema:
         type: number
         format: double
+    Sources:
+      name: sources
+      in: query
+      description: Comma-separated list of data sources to query, e.g. osm (OpenStreetMap), oa (OpenAddresses), wof (Who's on First), gn (Geonames).
+      schema:
+        type: string
+      example: osm,oa
+    Lang:
+      name: lang
+      in: query
+      description: Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available.
+      schema:
+        type: string
+      example: en
+    BoundaryCountry:
+      name: boundary.country
+      in: query
+      description: Restrict results to one or more ISO 3166-1 country codes.
+      schema:
+        type: string
+      example: US
   schemas:
-    GeocodingResponse:
+    GeocodingBlock:
       type: object
-      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
+      description: Metadata about the geocoding request and engine.
       properties:
-        geocoding:
-          $ref: '#/components/schemas/GeocodingBlock'
-        type:
+        version:
           type: string
-          example: FeatureCollection
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/Feature'
-        bbox:
-          type: array
-          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
-          items:
-            type: number
-            format: double
-    Geometry:
-      type: object
-      properties:
-        type:
+          example: '0.2'
+        attribution:
           type: string
-          example: Point
-        coordinates:
-          type: array
-          description: Coordinates as [longitude, latitude].
-          items:
-            type: number
-            format: double
-          example:
-          - -73.981929
-          - 40.752663
+          example: https://geocode.earth/guidelines
+        query:
+          type: object
+          additionalProperties: true
+          description: Echo of the parsed query parameters used for the request.
+        engine:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Pelias
+            author:
+              type: string
+              example: Geocode Earth
+            version:
+              type: string
+              example: '1.0'
+        timestamp:
+          type: integer
+          format: int64
+          description: Unix epoch timestamp (milliseconds) when the response was generated.
     FeatureProperties:
       type: object
       description: Descriptive properties for a geocoded record.
@@ -210,36 +217,25 @@ components:
         label:
           type: string
           example: Empire State Building, New York, NY, USA
-    GeocodingBlock:
+    GeocodingResponse:
       type: object
-      description: Metadata about the geocoding request and engine.
+      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
       properties:
-        version:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingBlock'
+        type:
           type: string
-          example: '0.2'
-        attribution:
-          type: string
-          example: https://geocode.earth/guidelines
-        query:
-          type: object
-          additionalProperties: true
-          description: Echo of the parsed query parameters used for the request.
-        engine:
-          type: object
-          properties:
-            name:
-              type: string
-              example: Pelias
-            author:
-              type: string
-              example: Geocode Earth
-            version:
-              type: string
-              example: '1.0'
-        timestamp:
-          type: integer
-          format: int64
-          description: Unix epoch timestamp (milliseconds) when the response was generated.
+          example: FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
+        bbox:
+          type: array
+          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
+          items:
+            type: number
+            format: double
     Feature:
       type: object
       description: A single GeoJSON Feature representing a geocoded record.
@@ -256,17 +252,21 @@ components:
           items:
             type: number
             format: double
-  responses:
-    Unauthorized:
-      description: The API key was missing or invalid.
-    BadRequest:
-      description: The request was malformed or missing a required parameter.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GeocodingResponse'
-    TooManyRequests:
-      description: The account rate limit or quota was exceeded.
+    Geometry:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Point
+        coordinates:
+          type: array
+          description: Coordinates as [longitude, latitude].
+          items:
+            type: number
+            format: double
+          example:
+          - -73.981929
+          - 40.752663
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

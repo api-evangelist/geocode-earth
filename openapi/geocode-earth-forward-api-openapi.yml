@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Geocode Earth Forward API
   description: Hosted geocoding and address autocomplete API built on the open-source Pelias geocoder. Provides forward (search), autocomplete, reverse, and structured geocoding plus place lookup over open data sources (OpenStreetMap, OpenAddresses, Who's on First, and Geonames). All responses are GeoJSON FeatureCollections. Authentication is via an api_key query string parameter.
@@ -170,6 +170,13 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   parameters:
+    BoundaryRectMaxLat:
+      name: boundary.rect.max_lat
+      in: query
+      description: Maximum latitude of a bounding rectangle filter.
+      schema:
+        type: number
+        format: double
     Sources:
       name: sources
       in: query
@@ -177,24 +184,38 @@ components:
       schema:
         type: string
       example: osm,oa
-    BoundaryRectMinLon:
-      name: boundary.rect.min_lon
+    Lang:
+      name: lang
       in: query
-      description: Minimum longitude of a bounding rectangle filter.
+      description: Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available.
       schema:
-        type: number
-        format: double
-    BoundaryCircleLat:
-      name: boundary.circle.lat
-      in: query
-      description: Latitude of the center of a bounding circle filter.
-      schema:
-        type: number
-        format: double
+        type: string
+      example: en
     BoundaryCircleLon:
       name: boundary.circle.lon
       in: query
       description: Longitude of the center of a bounding circle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryRectMaxLon:
+      name: boundary.rect.max_lon
+      in: query
+      description: Maximum longitude of a bounding rectangle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryRectMinLat:
+      name: boundary.rect.min_lat
+      in: query
+      description: Minimum latitude of a bounding rectangle filter.
+      schema:
+        type: number
+        format: double
+    FocusPointLat:
+      name: focus.point.lat
+      in: query
+      description: Latitude used to prioritize results near a given location.
       schema:
         type: number
         format: double
@@ -205,24 +226,10 @@ components:
       description: Your Geocode Earth API key.
       schema:
         type: string
-    BoundaryRectMaxLat:
-      name: boundary.rect.max_lat
+    BoundaryCircleLat:
+      name: boundary.circle.lat
       in: query
-      description: Maximum latitude of a bounding rectangle filter.
-      schema:
-        type: number
-        format: double
-    Lang:
-      name: lang
-      in: query
-      description: Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available.
-      schema:
-        type: string
-      example: en
-    BoundaryRectMaxLon:
-      name: boundary.rect.max_lon
-      in: query
-      description: Maximum longitude of a bounding rectangle filter.
+      description: Latitude of the center of a bounding circle filter.
       schema:
         type: number
         format: double
@@ -235,27 +242,6 @@ components:
         default: 10
         minimum: 1
         maximum: 40
-    BoundaryCircleRadius:
-      name: boundary.circle.radius
-      in: query
-      description: Radius of the bounding circle filter, in kilometers.
-      schema:
-        type: number
-        format: double
-    FocusPointLon:
-      name: focus.point.lon
-      in: query
-      description: Longitude used to prioritize results near a given location.
-      schema:
-        type: number
-        format: double
-    BoundaryRectMinLat:
-      name: boundary.rect.min_lat
-      in: query
-      description: Minimum latitude of a bounding rectangle filter.
-      schema:
-        type: number
-        format: double
     Layers:
       name: layers
       in: query
@@ -263,10 +249,24 @@ components:
       schema:
         type: string
       example: venue,address
-    FocusPointLat:
-      name: focus.point.lat
+    FocusPointLon:
+      name: focus.point.lon
       in: query
-      description: Latitude used to prioritize results near a given location.
+      description: Longitude used to prioritize results near a given location.
+      schema:
+        type: number
+        format: double
+    BoundaryRectMinLon:
+      name: boundary.rect.min_lon
+      in: query
+      description: Minimum longitude of a bounding rectangle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryCircleRadius:
+      name: boundary.circle.radius
+      in: query
+      description: Radius of the bounding circle filter, in kilometers.
       schema:
         type: number
         format: double
@@ -277,34 +277,71 @@ components:
       schema:
         type: string
       example: US
-  responses:
-    BadRequest:
-      description: The request was malformed or missing a required parameter.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GeocodingResponse'
-    Unauthorized:
-      description: The API key was missing or invalid.
-    TooManyRequests:
-      description: The account rate limit or quota was exceeded.
   schemas:
-    Feature:
+    GeocodingBlock:
       type: object
-      description: A single GeoJSON Feature representing a geocoded record.
+      description: Metadata about the geocoding request and engine.
       properties:
+        version:
+          type: string
+          example: '0.2'
+        attribution:
+          type: string
+          example: https://geocode.earth/guidelines
+        query:
+          type: object
+          additionalProperties: true
+          description: Echo of the parsed query parameters used for the request.
+        engine:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Pelias
+            author:
+              type: string
+              example: Geocode Earth
+            version:
+              type: string
+              example: '1.0'
+        timestamp:
+          type: integer
+          format: int64
+          description: Unix epoch timestamp (milliseconds) when the response was generated.
+    GeocodingResponse:
+      type: object
+      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
+      properties:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingBlock'
         type:
           type: string
-          example: Feature
-        geometry:
-          $ref: '#/components/schemas/Geometry'
-        properties:
-          $ref: '#/components/schemas/FeatureProperties'
+          example: FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
         bbox:
           type: array
+          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
           items:
             type: number
             format: double
+    Geometry:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Point
+        coordinates:
+          type: array
+          description: Coordinates as [longitude, latitude].
+          items:
+            type: number
+            format: double
+          example:
+          - -73.981929
+          - 40.752663
     FeatureProperties:
       type: object
       description: Descriptive properties for a geocoded record.
@@ -367,70 +404,33 @@ components:
         label:
           type: string
           example: Empire State Building, New York, NY, USA
-    GeocodingResponse:
+    Feature:
       type: object
-      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
+      description: A single GeoJSON Feature representing a geocoded record.
       properties:
-        geocoding:
-          $ref: '#/components/schemas/GeocodingBlock'
         type:
           type: string
-          example: FeatureCollection
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/Feature'
+          example: Feature
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        properties:
+          $ref: '#/components/schemas/FeatureProperties'
         bbox:
           type: array
-          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
           items:
             type: number
             format: double
-    Geometry:
-      type: object
-      properties:
-        type:
-          type: string
-          example: Point
-        coordinates:
-          type: array
-          description: Coordinates as [longitude, latitude].
-          items:
-            type: number
-            format: double
-          example:
-          - -73.981929
-          - 40.752663
-    GeocodingBlock:
-      type: object
-      description: Metadata about the geocoding request and engine.
-      properties:
-        version:
-          type: string
-          example: '0.2'
-        attribution:
-          type: string
-          example: https://geocode.earth/guidelines
-        query:
-          type: object
-          additionalProperties: true
-          description: Echo of the parsed query parameters used for the request.
-        engine:
-          type: object
-          properties:
-            name:
-              type: string
-              example: Pelias
-            author:
-              type: string
-              example: Geocode Earth
-            version:
-              type: string
-              example: '1.0'
-        timestamp:
-          type: integer
-          format: int64
-          description: Unix epoch timestamp (milliseconds) when the response was generated.
+  responses:
+    Unauthorized:
+      description: The API key was missing or invalid.
+    BadRequest:
+      description: The request was malformed or missing a required parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeocodingResponse'
+    TooManyRequests:
+      description: The account rate limit or quota was exceeded.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

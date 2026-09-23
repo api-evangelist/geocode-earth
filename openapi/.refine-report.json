@@ -1,9 +1,7 @@
 {
   "provider": "geocode-earth",
   "sources": [
-    "geocode-earth-forward-api-openapi.yml",
-    "geocode-earth-place-api-openapi.yml",
-    "geocode-earth-reverse-api-openapi.yml"
+    "_original/geocode-earth-openapi.yml"
   ],
   "outputs": [
     "geocode-earth-forward-api-openapi.yml",
@@ -13,6 +11,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "geocode-earth-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "geocode-earth-openapi.yml: declared missing tag: Forward",
+    "geocode-earth-openapi.yml: declared missing tag: Place",
+    "geocode-earth-openapi.yml: declared missing tag: Reverse",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "geocode-earth-forward-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "geocode-earth-place-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "geocode-earth-reverse-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
