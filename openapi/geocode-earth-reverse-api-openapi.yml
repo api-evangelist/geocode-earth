@@ -61,69 +61,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  responses:
-    BadRequest:
-      description: The request was malformed or missing a required parameter.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GeocodingResponse'
-    Unauthorized:
-      description: The API key was missing or invalid.
-    TooManyRequests:
-      description: The account rate limit or quota was exceeded.
-  parameters:
-    Size:
-      name: size
-      in: query
-      description: Maximum number of results to return (default 10).
-      schema:
-        type: integer
-        default: 10
-        minimum: 1
-        maximum: 40
-    Layers:
-      name: layers
-      in: query
-      description: Comma-separated list of layers to search, e.g. venue, address, street, locality, region, country, or the coarse alias.
-      schema:
-        type: string
-      example: venue,address
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: Your Geocode Earth API key.
-      schema:
-        type: string
-    BoundaryCircleRadius:
-      name: boundary.circle.radius
-      in: query
-      description: Radius of the bounding circle filter, in kilometers.
-      schema:
-        type: number
-        format: double
-    Sources:
-      name: sources
-      in: query
-      description: Comma-separated list of data sources to query, e.g. osm (OpenStreetMap), oa (OpenAddresses), wof (Who's on First), gn (Geonames).
-      schema:
-        type: string
-      example: osm,oa
-    Lang:
-      name: lang
-      in: query
-      description: Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available.
-      schema:
-        type: string
-      example: en
-    BoundaryCountry:
-      name: boundary.country
-      in: query
-      description: Restrict results to one or more ISO 3166-1 country codes.
-      schema:
-        type: string
-      example: US
   schemas:
     GeocodingBlock:
       type: object
@@ -217,25 +154,6 @@ components:
         label:
           type: string
           example: Empire State Building, New York, NY, USA
-    GeocodingResponse:
-      type: object
-      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
-      properties:
-        geocoding:
-          $ref: '#/components/schemas/GeocodingBlock'
-        type:
-          type: string
-          example: FeatureCollection
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/Feature'
-        bbox:
-          type: array
-          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
-          items:
-            type: number
-            format: double
     Feature:
       type: object
       description: A single GeoJSON Feature representing a geocoded record.
@@ -267,6 +185,88 @@ components:
           example:
           - -73.981929
           - 40.752663
+    GeocodingResponse:
+      type: object
+      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
+      properties:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingBlock'
+        type:
+          type: string
+          example: FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
+        bbox:
+          type: array
+          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
+          items:
+            type: number
+            format: double
+  parameters:
+    BoundaryCircleRadius:
+      name: boundary.circle.radius
+      in: query
+      description: Radius of the bounding circle filter, in kilometers.
+      schema:
+        type: number
+        format: double
+    BoundaryCountry:
+      name: boundary.country
+      in: query
+      description: Restrict results to one or more ISO 3166-1 country codes.
+      schema:
+        type: string
+      example: US
+    Sources:
+      name: sources
+      in: query
+      description: Comma-separated list of data sources to query, e.g. osm (OpenStreetMap), oa (OpenAddresses), wof (Who's on First), gn (Geonames).
+      schema:
+        type: string
+      example: osm,oa
+    Size:
+      name: size
+      in: query
+      description: Maximum number of results to return (default 10).
+      schema:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 40
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Your Geocode Earth API key.
+      schema:
+        type: string
+    Lang:
+      name: lang
+      in: query
+      description: Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available.
+      schema:
+        type: string
+      example: en
+    Layers:
+      name: layers
+      in: query
+      description: Comma-separated list of layers to search, e.g. venue, address, street, locality, region, country, or the coarse alias.
+      schema:
+        type: string
+      example: venue,address
+  responses:
+    BadRequest:
+      description: The request was malformed or missing a required parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeocodingResponse'
+    Unauthorized:
+      description: The API key was missing or invalid.
+    TooManyRequests:
+      description: The account rate limit or quota was exceeded.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
