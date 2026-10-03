@@ -48,6 +48,56 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   schemas:
+    GeocodingResponse:
+      type: object
+      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
+      properties:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingBlock'
+        type:
+          type: string
+          example: FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
+        bbox:
+          type: array
+          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
+          items:
+            type: number
+            format: double
+    Geometry:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Point
+        coordinates:
+          type: array
+          description: Coordinates as [longitude, latitude].
+          items:
+            type: number
+            format: double
+          example:
+          - -73.981929
+          - 40.752663
+    Feature:
+      type: object
+      description: A single GeoJSON Feature representing a geocoded record.
+      properties:
+        type:
+          type: string
+          example: Feature
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        properties:
+          $ref: '#/components/schemas/FeatureProperties'
+        bbox:
+          type: array
+          items:
+            type: number
+            format: double
     GeocodingBlock:
       type: object
       description: Metadata about the geocoding request and engine.
@@ -140,67 +190,6 @@ components:
         label:
           type: string
           example: Empire State Building, New York, NY, USA
-    Feature:
-      type: object
-      description: A single GeoJSON Feature representing a geocoded record.
-      properties:
-        type:
-          type: string
-          example: Feature
-        geometry:
-          $ref: '#/components/schemas/Geometry'
-        properties:
-          $ref: '#/components/schemas/FeatureProperties'
-        bbox:
-          type: array
-          items:
-            type: number
-            format: double
-    Geometry:
-      type: object
-      properties:
-        type:
-          type: string
-          example: Point
-        coordinates:
-          type: array
-          description: Coordinates as [longitude, latitude].
-          items:
-            type: number
-            format: double
-          example:
-          - -73.981929
-          - 40.752663
-    GeocodingResponse:
-      type: object
-      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
-      properties:
-        geocoding:
-          $ref: '#/components/schemas/GeocodingBlock'
-        type:
-          type: string
-          example: FeatureCollection
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/Feature'
-        bbox:
-          type: array
-          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
-          items:
-            type: number
-            format: double
-  responses:
-    BadRequest:
-      description: The request was malformed or missing a required parameter.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GeocodingResponse'
-    Unauthorized:
-      description: The API key was missing or invalid.
-    TooManyRequests:
-      description: The account rate limit or quota was exceeded.
   parameters:
     Lang:
       name: lang
@@ -216,6 +205,17 @@ components:
       description: Your Geocode Earth API key.
       schema:
         type: string
+  responses:
+    BadRequest:
+      description: The request was malformed or missing a required parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GeocodingResponse'
+    TooManyRequests:
+      description: The account rate limit or quota was exceeded.
+    Unauthorized:
+      description: The API key was missing or invalid.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
