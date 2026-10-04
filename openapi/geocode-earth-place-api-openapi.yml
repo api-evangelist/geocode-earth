@@ -48,86 +48,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   schemas:
-    GeocodingResponse:
-      type: object
-      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
-      properties:
-        geocoding:
-          $ref: '#/components/schemas/GeocodingBlock'
-        type:
-          type: string
-          example: FeatureCollection
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/Feature'
-        bbox:
-          type: array
-          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
-          items:
-            type: number
-            format: double
-    Geometry:
-      type: object
-      properties:
-        type:
-          type: string
-          example: Point
-        coordinates:
-          type: array
-          description: Coordinates as [longitude, latitude].
-          items:
-            type: number
-            format: double
-          example:
-          - -73.981929
-          - 40.752663
-    Feature:
-      type: object
-      description: A single GeoJSON Feature representing a geocoded record.
-      properties:
-        type:
-          type: string
-          example: Feature
-        geometry:
-          $ref: '#/components/schemas/Geometry'
-        properties:
-          $ref: '#/components/schemas/FeatureProperties'
-        bbox:
-          type: array
-          items:
-            type: number
-            format: double
-    GeocodingBlock:
-      type: object
-      description: Metadata about the geocoding request and engine.
-      properties:
-        version:
-          type: string
-          example: '0.2'
-        attribution:
-          type: string
-          example: https://geocode.earth/guidelines
-        query:
-          type: object
-          additionalProperties: true
-          description: Echo of the parsed query parameters used for the request.
-        engine:
-          type: object
-          properties:
-            name:
-              type: string
-              example: Pelias
-            author:
-              type: string
-              example: Geocode Earth
-            version:
-              type: string
-              example: '1.0'
-        timestamp:
-          type: integer
-          format: int64
-          description: Unix epoch timestamp (milliseconds) when the response was generated.
     FeatureProperties:
       type: object
       description: Descriptive properties for a geocoded record.
@@ -190,22 +110,89 @@ components:
         label:
           type: string
           example: Empire State Building, New York, NY, USA
-  parameters:
-    Lang:
-      name: lang
-      in: query
-      description: Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available.
-      schema:
-        type: string
-      example: en
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: Your Geocode Earth API key.
-      schema:
-        type: string
+    GeocodingResponse:
+      type: object
+      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
+      properties:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingBlock'
+        type:
+          type: string
+          example: FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
+        bbox:
+          type: array
+          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
+          items:
+            type: number
+            format: double
+    GeocodingBlock:
+      type: object
+      description: Metadata about the geocoding request and engine.
+      properties:
+        version:
+          type: string
+          example: '0.2'
+        attribution:
+          type: string
+          example: https://geocode.earth/guidelines
+        query:
+          type: object
+          additionalProperties: true
+          description: Echo of the parsed query parameters used for the request.
+        engine:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Pelias
+            author:
+              type: string
+              example: Geocode Earth
+            version:
+              type: string
+              example: '1.0'
+        timestamp:
+          type: integer
+          format: int64
+          description: Unix epoch timestamp (milliseconds) when the response was generated.
+    Feature:
+      type: object
+      description: A single GeoJSON Feature representing a geocoded record.
+      properties:
+        type:
+          type: string
+          example: Feature
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        properties:
+          $ref: '#/components/schemas/FeatureProperties'
+        bbox:
+          type: array
+          items:
+            type: number
+            format: double
+    Geometry:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Point
+        coordinates:
+          type: array
+          description: Coordinates as [longitude, latitude].
+          items:
+            type: number
+            format: double
+          example:
+          - -73.981929
+          - 40.752663
   responses:
+    Unauthorized:
+      description: The API key was missing or invalid.
     BadRequest:
       description: The request was malformed or missing a required parameter.
       content:
@@ -214,8 +201,21 @@ components:
             $ref: '#/components/schemas/GeocodingResponse'
     TooManyRequests:
       description: The account rate limit or quota was exceeded.
-    Unauthorized:
-      description: The API key was missing or invalid.
+  parameters:
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Your Geocode Earth API key.
+      schema:
+        type: string
+    Lang:
+      name: lang
+      in: query
+      description: Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available.
+      schema:
+        type: string
+      example: en
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
