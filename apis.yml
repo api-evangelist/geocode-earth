@@ -41,7 +41,7 @@ tags:
 - Pelias
 - Open Data
 created: '2026-06-21'
-modified: '2026-06-21'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: geocode-earth:geocode-earth-forward-api
@@ -123,6 +123,8 @@ apis:
   - type: Documentation
     url: https://geocode.earth/docs/
 common:
+- url: https://geocode.earth/blog/
+  type: Blog
 - type: AgenticAccess
   url: agentic-access/geocode-earth-agentic-access.yml
 - type: DomainSecurity
