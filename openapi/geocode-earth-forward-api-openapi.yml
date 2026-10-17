@@ -169,6 +169,114 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  parameters:
+    BoundaryCircleLon:
+      name: boundary.circle.lon
+      in: query
+      description: Longitude of the center of a bounding circle filter.
+      schema:
+        type: number
+        format: double
+    Lang:
+      name: lang
+      in: query
+      description: Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available.
+      schema:
+        type: string
+      example: en
+    BoundaryRectMinLat:
+      name: boundary.rect.min_lat
+      in: query
+      description: Minimum latitude of a bounding rectangle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryCountry:
+      name: boundary.country
+      in: query
+      description: Restrict results to one or more ISO 3166-1 country codes.
+      schema:
+        type: string
+      example: US
+    Size:
+      name: size
+      in: query
+      description: Maximum number of results to return (default 10).
+      schema:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 40
+    Sources:
+      name: sources
+      in: query
+      description: Comma-separated list of data sources to query, e.g. osm (OpenStreetMap), oa (OpenAddresses), wof (Who's on First), gn (Geonames).
+      schema:
+        type: string
+      example: osm,oa
+    FocusPointLon:
+      name: focus.point.lon
+      in: query
+      description: Longitude used to prioritize results near a given location.
+      schema:
+        type: number
+        format: double
+    BoundaryCircleLat:
+      name: boundary.circle.lat
+      in: query
+      description: Latitude of the center of a bounding circle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryCircleRadius:
+      name: boundary.circle.radius
+      in: query
+      description: Radius of the bounding circle filter, in kilometers.
+      schema:
+        type: number
+        format: double
+    BoundaryRectMinLon:
+      name: boundary.rect.min_lon
+      in: query
+      description: Minimum longitude of a bounding rectangle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryRectMaxLon:
+      name: boundary.rect.max_lon
+      in: query
+      description: Maximum longitude of a bounding rectangle filter.
+      schema:
+        type: number
+        format: double
+    BoundaryRectMaxLat:
+      name: boundary.rect.max_lat
+      in: query
+      description: Maximum latitude of a bounding rectangle filter.
+      schema:
+        type: number
+        format: double
+    FocusPointLat:
+      name: focus.point.lat
+      in: query
+      description: Latitude used to prioritize results near a given location.
+      schema:
+        type: number
+        format: double
+    ApiKey:
+      name: api_key
+      in: query
+      required: true
+      description: Your Geocode Earth API key.
+      schema:
+        type: string
+    Layers:
+      name: layers
+      in: query
+      description: Comma-separated list of layers to search, e.g. venue, address, street, locality, region, country, or the coarse alias.
+      schema:
+        type: string
+      example: venue,address
   schemas:
     GeocodingBlock:
       type: object
@@ -200,6 +308,56 @@ components:
           type: integer
           format: int64
           description: Unix epoch timestamp (milliseconds) when the response was generated.
+    GeocodingResponse:
+      type: object
+      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
+      properties:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingBlock'
+        type:
+          type: string
+          example: FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feature'
+        bbox:
+          type: array
+          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
+          items:
+            type: number
+            format: double
+    Geometry:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Point
+        coordinates:
+          type: array
+          description: Coordinates as [longitude, latitude].
+          items:
+            type: number
+            format: double
+          example:
+          - -73.981929
+          - 40.752663
+    Feature:
+      type: object
+      description: A single GeoJSON Feature representing a geocoded record.
+      properties:
+        type:
+          type: string
+          example: Feature
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        properties:
+          $ref: '#/components/schemas/FeatureProperties'
+        bbox:
+          type: array
+          items:
+            type: number
+            format: double
     FeatureProperties:
       type: object
       description: Descriptive properties for a geocoded record.
@@ -262,165 +420,9 @@ components:
         label:
           type: string
           example: Empire State Building, New York, NY, USA
-    Geometry:
-      type: object
-      properties:
-        type:
-          type: string
-          example: Point
-        coordinates:
-          type: array
-          description: Coordinates as [longitude, latitude].
-          items:
-            type: number
-            format: double
-          example:
-          - -73.981929
-          - 40.752663
-    GeocodingResponse:
-      type: object
-      description: A GeoJSON FeatureCollection returned by the Geocode Earth API.
-      properties:
-        geocoding:
-          $ref: '#/components/schemas/GeocodingBlock'
-        type:
-          type: string
-          example: FeatureCollection
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/Feature'
-        bbox:
-          type: array
-          description: Bounding box of all results as [min_lon, min_lat, max_lon, max_lat].
-          items:
-            type: number
-            format: double
-    Feature:
-      type: object
-      description: A single GeoJSON Feature representing a geocoded record.
-      properties:
-        type:
-          type: string
-          example: Feature
-        geometry:
-          $ref: '#/components/schemas/Geometry'
-        properties:
-          $ref: '#/components/schemas/FeatureProperties'
-        bbox:
-          type: array
-          items:
-            type: number
-            format: double
-  parameters:
-    BoundaryRectMinLon:
-      name: boundary.rect.min_lon
-      in: query
-      description: Minimum longitude of a bounding rectangle filter.
-      schema:
-        type: number
-        format: double
-    BoundaryCircleLon:
-      name: boundary.circle.lon
-      in: query
-      description: Longitude of the center of a bounding circle filter.
-      schema:
-        type: number
-        format: double
-    Sources:
-      name: sources
-      in: query
-      description: Comma-separated list of data sources to query, e.g. osm (OpenStreetMap), oa (OpenAddresses), wof (Who's on First), gn (Geonames).
-      schema:
-        type: string
-      example: osm,oa
-    BoundaryCircleRadius:
-      name: boundary.circle.radius
-      in: query
-      description: Radius of the bounding circle filter, in kilometers.
-      schema:
-        type: number
-        format: double
-    BoundaryCircleLat:
-      name: boundary.circle.lat
-      in: query
-      description: Latitude of the center of a bounding circle filter.
-      schema:
-        type: number
-        format: double
-    BoundaryRectMaxLon:
-      name: boundary.rect.max_lon
-      in: query
-      description: Maximum longitude of a bounding rectangle filter.
-      schema:
-        type: number
-        format: double
-    ApiKey:
-      name: api_key
-      in: query
-      required: true
-      description: Your Geocode Earth API key.
-      schema:
-        type: string
-    Size:
-      name: size
-      in: query
-      description: Maximum number of results to return (default 10).
-      schema:
-        type: integer
-        default: 10
-        minimum: 1
-        maximum: 40
-    BoundaryRectMinLat:
-      name: boundary.rect.min_lat
-      in: query
-      description: Minimum latitude of a bounding rectangle filter.
-      schema:
-        type: number
-        format: double
-    FocusPointLon:
-      name: focus.point.lon
-      in: query
-      description: Longitude used to prioritize results near a given location.
-      schema:
-        type: number
-        format: double
-    FocusPointLat:
-      name: focus.point.lat
-      in: query
-      description: Latitude used to prioritize results near a given location.
-      schema:
-        type: number
-        format: double
-    Lang:
-      name: lang
-      in: query
-      description: Preferred response language as an ISO 639-1 or 639-3 code, used to localize result labels where translations are available.
-      schema:
-        type: string
-      example: en
-    BoundaryRectMaxLat:
-      name: boundary.rect.max_lat
-      in: query
-      description: Maximum latitude of a bounding rectangle filter.
-      schema:
-        type: number
-        format: double
-    Layers:
-      name: layers
-      in: query
-      description: Comma-separated list of layers to search, e.g. venue, address, street, locality, region, country, or the coarse alias.
-      schema:
-        type: string
-      example: venue,address
-    BoundaryCountry:
-      name: boundary.country
-      in: query
-      description: Restrict results to one or more ISO 3166-1 country codes.
-      schema:
-        type: string
-      example: US
   responses:
+    TooManyRequests:
+      description: The account rate limit or quota was exceeded.
     Unauthorized:
       description: The API key was missing or invalid.
     BadRequest:
@@ -429,8 +431,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/GeocodingResponse'
-    TooManyRequests:
-      description: The account rate limit or quota was exceeded.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
