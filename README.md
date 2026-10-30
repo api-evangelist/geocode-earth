@@ -1,4 +1,4 @@
-# Geocode Earth (geocode-earth)
+# Geocode Earth
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,135 +66,120 @@
 
 Geocode Earth is a hosted geocoding and address autocomplete API built by the team that maintains Pelias, the open-source geocoder. It provides forward (search), autocomplete, reverse, and structured geocoding plus place lookup over fully open data (OpenStreetMap, OpenAddresses, Who's on First, and Geonames), with results that can be stored without restrictive licensing.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/geocode-earth/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/geocode-earth/refs/heads/main/apis.yml)
+**Areas:** Geocoding · Address Autocomplete · Reverse Geocoding · Mapping · Pelias · Open Data
 
-## Tags
+## Geocode Earth on APIs.io
 
-- Geocoding
-- Address Autocomplete
-- Reverse Geocoding
-- Mapping
-- Pelias
-- Open Data
+Everything profiled for Geocode Earth is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/geocode-earth/](https://apis.io/providers/geocode-earth/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (3)
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+- [Geocode Earth Forward API](https://apis.io/apis/geocode-earth/geocode-earth-forward-api/) — The Forward API from Geocode Earth — 3 operation(s) for forward.
+- [Geocode Earth Place API](https://apis.io/apis/geocode-earth/geocode-earth-place-api/) — The Place API from Geocode Earth — 1 operation(s) for place.
+- [Geocode Earth Reverse API](https://apis.io/apis/geocode-earth/geocode-earth-reverse-api/) — The Reverse API from Geocode Earth — 1 operation(s) for reverse.
 
-## APIs
+### Published properties
 
-### Geocode Earth Search API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Forward geocoding that turns a free-text place or address string into structured GeoJSON results with coordinates, ranked by relevance and filterable by country, layer, and source.
+#### Agentic access (1)
 
-- **Human URL:** [https://geocode.earth/docs/forward/search/](https://geocode.earth/docs/forward/search/)
-- **Base URL:** `https://api.geocode.earth/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Geocode Earth Agentic Access](https://apis.io/agentic-access/geocode-earth/geocode-earth-agentic-access/)
 
-- Geocoding
-- Forward
-- Search
+#### Collections (4)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://geocode.earth/docs/forward/search/)
-- [API Reference](https://geocode.earth/docs/)
-- [OpenAPI](openapi/geocode-earth-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/geocode-earth.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/geocode-earth.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Geocode Earth API](https://apis.io/collections/geocode-earth/open-geocode-earth/)
+- [Geocode Earth Forward API](https://apis.io/collections/geocode-earth/open-geocode-earth-forward-api/)
+- [Geocode Earth Forward Place API](https://apis.io/collections/geocode-earth/open-geocode-earth-place-api/)
+- [Geocode Earth Forward Reverse API](https://apis.io/collections/geocode-earth/open-geocode-earth-reverse-api/)
 
-### Geocode Earth Autocomplete API
+#### Security (2)
 
-Type-ahead geocoding optimized for partial, real-time user input, returning ranked suggestions as the user types and supporting focus.point to prefer nearby results.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://geocode.earth/docs/forward/autocomplete/](https://geocode.earth/docs/forward/autocomplete/)
-- **Base URL:** `https://api.geocode.earth/v1`
+- [Geocode Earth Authentication](https://apis.io/security/geocode-earth/geocode-earth-authentication/)
+- [Geocode Earth Domain Security](https://apis.io/security/geocode-earth/geocode-earth-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Autocomplete
-- Typeahead
-- Forward
+Published plans, tiers and prices.
 
-#### Properties
+- [Geocode Earth Plans Pricing](https://apis.io/plans/geocode-earth/geocode-earth-plans-pricing/)
 
-- [Documentation](https://geocode.earth/docs/forward/autocomplete/)
-- [OpenAPI](openapi/geocode-earth-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/geocode-earth.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/geocode-earth.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Geocode Earth Reverse API
+Published request limits.
 
-Reverse geocoding that converts a latitude/longitude point into the nearest address, venue, or (with the layers parameter) the administrative area that contains it.
+- [Geocode Earth Rate Limits](https://apis.io/rate-limits/geocode-earth/geocode-earth-rate-limits/)
 
-- **Human URL:** [https://geocode.earth/docs/reverse/reverse/](https://geocode.earth/docs/reverse/reverse/)
-- **Base URL:** `https://api.geocode.earth/v1`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Reverse Geocoding
-- Coordinates
+- [Geocode Earth Finops](https://apis.io/finops/geocode-earth/geocode-earth-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://geocode.earth/docs/reverse/reverse/)
-- [OpenAPI](openapi/geocode-earth-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/geocode-earth.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/geocode-earth.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Geocode Earth Structured Search API
-
-Forward geocoding from separate address components (address, locality, region, postalcode, country, and more) instead of a single free-text string, for cases where structured fields are already known.
-
-- **Human URL:** [https://geocode.earth/docs/forward/structured/](https://geocode.earth/docs/forward/structured/)
-- **Base URL:** `https://api.geocode.earth/v1`
-
-#### Tags
-
-- Structured
-- Geocoding
-- Forward
-
-#### Properties
-
-- [Documentation](https://geocode.earth/docs/forward/structured/)
-- [OpenAPI](openapi/geocode-earth-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/geocode-earth.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/geocode-earth.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Geocode Earth Place API
-
-Looks up one or more records directly by their Geocode Earth global identifier (gid), returning the full GeoJSON feature without running a search.
-
-- **Human URL:** [https://geocode.earth/docs/](https://geocode.earth/docs/)
-- **Base URL:** `https://api.geocode.earth/v1`
-
-#### Tags
-
-- Place
-- Lookup
-- GID
-
-#### Properties
-
-- [Documentation](https://geocode.earth/docs/)
-- [OpenAPI](openapi/geocode-earth-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/geocode-earth.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/geocode-earth.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/pelias)
-- [LinkedIn](https://www.linkedin.com/company/geocode-earth)
 - [Website](https://geocode.earth/)
 - [Documentation](https://geocode.earth/docs/)
-- [Plans](plans/geocode-earth-plans-pricing.yml)
-- [Rate Limits](rate-limits/geocode-earth-rate-limits.yml)
-- [Fin Ops](finops/geocode-earth-finops.yml)
+- [Blog](https://geocode.earth/blog/)
+- [GitHub](https://github.com/pelias)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 28.9** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 52.7 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 7.9 |
+
+**Agent readiness 26.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Government & Public Sector
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/geocode-earth/](https://apis.io/providers/geocode-earth/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Geocode Earth: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/geocode-earth/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
